@@ -1,33 +1,56 @@
+import React from 'react';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import {Link} from 'expo-router';
+const homeimage=require("../assets/images/homelogo.jfif");
 
-
-import { Text, View, StyleSheet } from 'react-native';
-import { Link } from 'expo-router'; 
-
-export default function Index() {
+const HomeScreen = () => {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Add first component here</Text>
-      <Link href="/Next" style={styles.button}>
-        go to next component
+      <Image source={homeimage} style={styles.logo} /> 
+      <Text style={styles.title}>Students <br>Exam Attendance</br></Text>
+      <TouchableOpacity style={styles.button}>
+        <Text style={styles.buttonText}>Get Started!</Text>
+        <Link href="/AcademicDetailsScreen" >
+        
       </Link>
+      </TouchableOpacity>
     </View>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'blue',
+    backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  text: {
-    color: '#fff',
+  logo: {
+    width: 320,
+    height: 440,
+    marginBottom: 20,
+    borderRadius:18,
   },
- 
+  title: {
+    color:black,
+    fontSize: 24,
+    fontWeight: 'bold',
+    marginBottom: 20,
+  },
   button: {
-    fontSize: 20,
-    textDecorationLine: 'underline',
+    backgroundColor: 'black',
+    padding: 15,
+    borderRadius: 5,
+  },
+  buttonText: {
     color: '#fff',
+    fontSize: 18,
+    textAlign: 'center',
   },
 });
+
+export default HomePage;
+
+
+
+
