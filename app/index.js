@@ -1,21 +1,21 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
-import {Link} from 'expo-router';
-const homeimage=require("../assets/images/homelogo.jfif");
+import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { Link } from 'expo-router';
+const homeimage = require('../assets/images/home.jpeg');
 
 const HomeScreen = () => {
   return (
     <View style={styles.container}>
-      <Image source={homeimage} style={styles.logo} /> 
-      <Text style={styles.title}>Students <br>Exam Attendance</br></Text>
-      <TouchableOpacity style={styles.button}>
-        <Text style={styles.buttonText}>Get Started!</Text>
-        <Link href="/AcademicDetailsScreen" >
-        
-      </Link>
-      </TouchableOpacity>
-    </View>
-  );
+    <Image source={homeimage} style={styles.logo} /> 
+    <Text style={styles.title}>Students Exam Attendance</Text>
+    <TouchableOpacity style={styles.button}>
+      <Text style={styles.buttonText}>Get Started!</Text>
+      <Link href="/AcademicDetailsScreen" >
+      
+    </Link>
+    </TouchableOpacity>
+  </View>
+);
 };
 
 const styles = StyleSheet.create({
@@ -29,10 +29,10 @@ const styles = StyleSheet.create({
     width: 320,
     height: 440,
     marginBottom: 20,
-    borderRadius:18,
+    borderRadius: 18,
   },
   title: {
-    color:black,
+    color: 'black', // Use 'black' instead of black 
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
@@ -47,10 +47,11 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center',
   },
+  link: {
+    color: 'blue', // Optional: Add a blue color to the link 
+    textDecorationLine: 'underline', // Optional: Add underline for the link 
+  },
 });
 
-export default HomePage;
-
-
-
+export default HomeScreen;
 
