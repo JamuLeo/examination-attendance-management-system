@@ -1,14 +1,14 @@
-
-
-import { Text, View, StyleSheet } from 'react-native';
-import { Link } from 'expo-router'; 
+import { View, StyleSheet } from "react-native";
+import { Link } from "expo-router";
 
 export default function Index() {
   return (
     <View style={styles.container}>
-      <Text style={styles.text}>Add first component here</Text>
-      <Link href="/Next" style={styles.button}>
-        go to next component
+      <Link href="/CheckInOut" style={styles.button}>
+        CHEKIN
+      </Link>
+      <Link href="/CheckInOut" style={styles.button}>
+        CHECKOUT
       </Link>
     </View>
   );
@@ -17,17 +17,17 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: 'blue',
-    alignItems: 'center',
-    justifyContent: 'center',
+    backgroundColor: "blue",
+    alignItems: "center",
+    justifyContent: "center",
   },
   text: {
-    color: '#fff',
+    color: "#fff",
   },
- 
+
   button: {
     fontSize: 20,
-    textDecorationLine: 'underline',
-    color: '#fff',
+    textDecorationLine: "underline",
+    color: "#fff",
   },
 });
