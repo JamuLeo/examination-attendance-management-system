@@ -6,6 +6,7 @@ export default function RootLayout() {
       <Stack.Screen name="index" options={{ title: "" }} />
       <Stack.Screen name="Next" options={{ title: "" }} />
       <Stack.Screen name="CheckInOut" options={{ title: "" }} />
+      <Stack.Screen name="SearchScreen" options={{ title: "" }} />
     </Stack>
   );
 }

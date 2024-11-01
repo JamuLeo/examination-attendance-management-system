@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { Link } from "expo-router";
 
 const CheckInOut = () => {
   return (
@@ -17,9 +18,9 @@ const CheckInOut = () => {
         <TouchableOpacity style={styles.scanButton}>
           <Text style={styles.buttonText}>Scan QR Code</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.scanButton}>
+        <Link href="/SearchScreen" style={styles.scanButton}>
           <Text style={styles.buttonText}>Search Manually</Text>
-        </TouchableOpacity>
+        </Link>
       </View>
     </View>
   );
@@ -34,11 +35,12 @@ const styles = StyleSheet.create({
   Logocontainer: {
     paddingTop: 50,
     position: "relative",
-    backgroundColor: "#FFFFFF", // Optional background color
+    backgroundColor: "#FFFFFF",
   },
   logo: {
-    width: 200, // Set the width of the logo
-    height: 200, // Set the height of the logo
+    // Set the width and height of the logo to 200
+    width: 200,
+    height: 200,
   },
   scanContainer: {
     paddingTop: 20,
