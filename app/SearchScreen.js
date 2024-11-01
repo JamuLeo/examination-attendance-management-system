@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import {
   StyleSheet,
   TextInput,
+  Image,
   View,
   Text,
   FlatList,
@@ -59,6 +60,18 @@ const SearchScreen = () => {
 
   return (
     <View style={styles.container}>
+      <View style={styles.searchbarcontainer}>
+        <Image
+          source={{
+            uri: "https://i.pinimg.com/736x/fa/2d/a4/fa2da4e6b61aa745f198314584dd8826.jpg", //Search bar to improve clarity
+          }}
+          style={styles.searchbar}
+          resizeMode="contain"
+        />
+      </View>
+      <Text style={styles.searchtip}>
+        Search Registration number and confirm by tapping!!
+      </Text>
       <TextInput
         style={styles.input}
         placeholder="Enter Registration Number or Name"
@@ -90,7 +103,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    paddingTop: 70,
+    backgroundColor: "#FFFFFF",
+  },
+  searchbarcontainer: {
+    alignItems: "center",
+  },
+  searchbar: {
+    width: 100,
+    height: 100,
   },
   input: {
     height: 40,
@@ -120,6 +140,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "green",
     fontWeight: "bold",
+  },
+  searchtip: {
+    textAlign: "center",
+    paddingBottom: 5,
   },
 });
 
