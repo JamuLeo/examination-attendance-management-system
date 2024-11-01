@@ -15,9 +15,9 @@ const CheckInOut = () => {
         />
       </View>
       <View style={styles.scanContainer}>
-        <TouchableOpacity style={styles.scanButton}>
+        <Link href="/ScanScreen" style={styles.scanButton}>
           <Text style={styles.buttonText}>Scan QR Code</Text>
-        </TouchableOpacity>
+        </Link>
         <Link href="/SearchScreen" style={styles.scanButton}>
           <Text style={styles.buttonText}>Search Manually</Text>
         </Link>
