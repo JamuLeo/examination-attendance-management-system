@@ -7,8 +7,8 @@ const CheckInOut = () => {
       <View style={styles.Logocontainer}>
         <Image
           source={{
-            uri: "https://i.pinimg.com/236x/8f/7c/c7/8f7cc771e974e3d6ed6d2e6acbdb549d.jpg",
-          }} //logo URL
+            uri: "https://i.pinimg.com/236x/8f/7c/c7/8f7cc771e974e3d6ed6d2e6acbdb549d.jpg", //This is our logo
+          }}
           style={styles.logo}
           resizeMode="contain"
         />

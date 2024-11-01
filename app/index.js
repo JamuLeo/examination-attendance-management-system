@@ -17,17 +17,15 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "blue",
+    backgroundColor: "#FFFFFF",
     alignItems: "center",
     justifyContent: "center",
   },
-  text: {
-    color: "#fff",
-  },
 
   button: {
-    fontSize: 20,
+    fontSize: 30,
     textDecorationLine: "underline",
-    color: "#fff",
+    color: "#000000",
+    fontWeight: "bold",
   },
 });
