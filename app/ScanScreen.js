@@ -1,4 +1,11 @@
-import { View, Text, StyleSheet, SafeAreaView, Pressable } from "react-native";
+import {
+  Image,
+  View,
+  Text,
+  StyleSheet,
+  SafeAreaView,
+  Pressable,
+} from "react-native";
 import { Link, Stack } from "expo-router";
 
 import { useCameraPermissions } from "expo-camera";
@@ -11,7 +18,15 @@ export default function ScanScreen() {
   return (
     <SafeAreaView style={styles.container}>
       <Stack.Screen options={{ title: "Overview", headerShown: false }} />
-      <Text style={styles.title}>QR Code Scanner</Text>
+      <View style={styles.scanContainer}>
+        <Image
+          source={{
+            uri: "https://i.pinimg.com/564x/cd/57/da/cd57da5934ec71804174e0320615d1e5.jpg", //This is our scanIcon
+          }}
+          style={styles.scanIcon}
+          resizeMode="contain"
+        />
+      </View>
       <View style={{ gap: 20 }}>
         <Pressable onPress={requestPermission}>
           <Text style={styles.buttonStyle}>Request Permissions</Text>
@@ -37,17 +52,33 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "black",
-    justifyContent: "space-around",
-    paddingVertical: 80,
+    backgroundColor: "#FFFFFF",
   },
-  title: {
-    color: "white",
-    fontSize: 40,
+  scanContainer: {
+    paddingTop: 150,
+    position: "relative",
+    backgroundColor: "#FFFFFF",
+  },
+  scanIcon: {
+    // Set the width and height of the scanIcon to 200
+    width: 200,
+    height: 200,
   },
   buttonStyle: {
-    color: "#0E7AFE",
-    fontSize: 20,
+    backgroundColor: "#FFFFFF", // White color
+    padding: 10,
     textAlign: "center",
+    fontSize: 20,
+    fontWeight: "bold",
+    paddingVertical: 15,
+    paddingHorizontal: 70,
+    borderRadius: 10,
+    elevation: 3,
+    shadowColor: "#000000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 2.8,
+    shadowRadius: 6,
+    borderWidth: 2, // Set border width
+    borderColor: "black", // Set border color to black
   },
 });
