@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Link } from 'expo-router';
 const homeimage = require('../assets/images/home.jpeg');
 
-const HomeScreen = () => {
+const HomeScreen =() => {
   return (
     <View style={styles.container}>
     <Image source={homeimage} style={styles.logo} /> 
