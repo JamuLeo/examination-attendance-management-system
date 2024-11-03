@@ -12,7 +12,10 @@ import {
 const studentsData = [
   { id: "1", registrationNumber: "BSC-44-21", name: "Hassan Zamin" },
   { id: "2", registrationNumber: "BSC-COM-06-21", name: "Leo Jamu" },
-  { id: "3", registrationNumber: "BSC-INF-15-21", name: "BOI LUW" },
+  { id: "3", registrationNumber: "BSC-INF-15-21", name: "Louis Makwinja" },
+  { id: "4", registrationNumber: "BSC-INF-17-21", name: "Rachael Chavula" },
+  { id: "5", registrationNumber: "BED/COM/07/22", name: "Malivenji Wongani" },
+  { id: "6", registrationNumber: "BSC/COM/27/21", name: "Chitowe Sifiso" },
   // Add more student records as needed
 ];
 

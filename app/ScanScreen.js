@@ -43,6 +43,9 @@ export default function ScanScreen() {
             </Text>
           </Pressable>
         </Link>
+        <Link href="/CheckInOut" style={styles.buttonStyle}>
+          <Text style={styles.buttonText}>Cancel</Text>
+        </Link>
       </View>
     </SafeAreaView>
   );
