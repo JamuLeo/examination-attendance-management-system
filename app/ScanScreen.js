@@ -1,49 +1,53 @@
-import { Image, View, Text, StyleSheet } from "react-native";
-import React from "react";
+import { View, Text, StyleSheet, SafeAreaView, Pressable } from "react-native";
+import { Link, Stack } from "expo-router";
 
-const ScanScreen = () => {
+import { useCameraPermissions } from "expo-camera";
+
+export default function ScanScreen() {
+  const [permission, requestPermission] = useCameraPermissions();
+
+  const isPermissionGranted = Boolean(permission?.granted);
+
   return (
-    <View style={styles.container}>
-      <Image
-        source={{
-          uri: "https://i.pinimg.com/564x/cd/57/da/cd57da5934ec71804174e0320615d1e5.jpg", //This is our logo
-        }}
-        style={styles.scanIcon}
-        resizeMode="contain"
-      />
-      <Text style={styles.scanbutton}>ScanScreen</Text>
-    </View>
+    <SafeAreaView style={styles.container}>
+      <Stack.Screen options={{ title: "Overview", headerShown: false }} />
+      <Text style={styles.title}>QR Code Scanner</Text>
+      <View style={{ gap: 20 }}>
+        <Pressable onPress={requestPermission}>
+          <Text style={styles.buttonStyle}>Request Permissions</Text>
+        </Pressable>
+        <Link href={"/scanner"} asChild>
+          <Pressable disabled={!isPermissionGranted}>
+            <Text
+              style={[
+                styles.buttonStyle,
+                { opacity: !isPermissionGranted ? 0.5 : 1 },
+              ]}
+            >
+              Scan Code
+            </Text>
+          </Pressable>
+        </Link>
+      </View>
+    </SafeAreaView>
   );
-};
+}
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "center",
-    backgroundColor: "#FFFFFF",
-    paddingTop: 80,
+    backgroundColor: "black",
+    justifyContent: "space-around",
+    paddingVertical: 80,
   },
-
-  scanIcon: {
-    // Set the width and height of the scanIcon to 200
-    width: 300,
-    height: 300,
+  title: {
+    color: "white",
+    fontSize: 40,
   },
-  scanbutton: {
-    fontSize: 30,
-    fontWeight: "bold",
-    backgroundColor: "#FFFFFF",
-    padding: 10,
-    paddingVertical: 15,
-    paddingHorizontal: 70,
-    borderRadius: 10,
-    elevation: 3,
-    shadowColor: "#000000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 2.8,
-    shadowRadius: 6,
-    borderWidth: 2,
-    borderColor: "black",
+  buttonStyle: {
+    color: "#0E7AFE",
+    fontSize: 20,
+    textAlign: "center",
   },
 });
-
-export default ScanScreen;
