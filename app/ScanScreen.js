@@ -7,7 +7,6 @@ import {
   Pressable,
 } from "react-native";
 import { Link, Stack } from "expo-router";
-
 import { useCameraPermissions } from "expo-camera";
 
 export default function ScanScreen() {
@@ -21,16 +20,19 @@ export default function ScanScreen() {
       <View style={styles.scanContainer}>
         <Image
           source={{
-            uri: "https://i.pinimg.com/564x/cd/57/da/cd57da5934ec71804174e0320615d1e5.jpg", //This is our scanIcon
+            uri: "https://i.pinimg.com/564x/cd/57/da/cd57da5934ec71804174e0320615d1e5.jpg", // This is our scanIcon
           }}
           style={styles.scanIcon}
           resizeMode="contain"
         />
       </View>
       <View style={{ gap: 20 }}>
-        <Pressable onPress={requestPermission}>
-          <Text style={styles.buttonStyle}>Request Permissions</Text>
-        </Pressable>
+        {/* Conditionally render the Request Permissions button to make it once and then hide it */}
+        {!isPermissionGranted && (
+          <Pressable onPress={requestPermission}>
+            <Text style={styles.buttonStyle}>Request Permissions</Text>
+          </Pressable>
+        )}
         <Link href={"/scanner"} asChild>
           <Pressable disabled={!isPermissionGranted}>
             <Text
@@ -63,7 +65,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
   },
   scanIcon: {
-    // Set the width and height of the scanIcon to 200
     width: 200,
     height: 200,
   },
