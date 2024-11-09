@@ -1,35 +1,54 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet,Image } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { FontAwesome5, MaterialIcons, Entypo } from '@expo/vector-icons';
-const pic=require('../assets/images/wisdomhat.jpg');
+
+const pic = require('../assets/images/wisdomhat.jpg');
+
 const Index = () => {
+  const [showUserInfo, setShowUserInfo] = useState(false);
+
+  // Dummy data for demonstration
+  const dummyUserData = {
+    name: 'Sifiso Chitowe',
+  };
+
   return (
     <View style={styles.container}>
-      <view style={styles.iconcontainer}>
-        <image source={pic} style={styles.icon}/>
-      </view>
+      <View style={styles.iconContainer}>
+        <Image source={pic} style={styles.schoolIcon} />
+      </View>
 
-      {/* Account Icon */}
-      <TouchableOpacity style={styles.accountIcon}>
+      {/* Account Icon with Toggle for User Info */}
+      <TouchableOpacity
+        style={styles.accountIcon}
+        onPress={() => setShowUserInfo(!showUserInfo)}
+      >
         <MaterialIcons name="account-circle" size={30} color="black" />
       </TouchableOpacity>
 
+      {/* Dummy Data - User Info */}
+      {showUserInfo && (
+        <View style={styles.userInfoContainer}>
+          <Text style={styles.userInfoText}> {dummyUserData.name}</Text>
+        </View>
+      )}
+
       {/* Check In Button */}
       <TouchableOpacity style={styles.button}>
-        <FontAwesome5 name="clock" size={24} color="#0000FF" style={styles.icon} />
-        <Text style={styles.buttonText}>Check In</Text>
+        <FontAwesome5 name="clock" size={24} color="#0000FF" style={styles.buttonIcon} />
+        <Text style={styles.buttonTextAligned}>Check In</Text>
       </TouchableOpacity>
 
       {/* Check Out Button */}
       <TouchableOpacity style={styles.button}>
-        <Entypo name="log-out" size={24} color="#1E90FF" style={styles.icon} />
-        <Text style={styles.buttonText}>Check Out</Text>
+        <Entypo name="log-out" size={24} color="#1E90FF" style={styles.buttonIcon} />
+        <Text style={styles.buttonTextAligned}>Check Out</Text>
       </TouchableOpacity>
 
       {/* Attendance Report Button */}
       <TouchableOpacity style={styles.button}>
-        <MaterialIcons name="event-note" size={24} color="#FFD700" style={styles.icon} />
-        <Text style={styles.buttonText}>Attendance Report</Text>
+        <MaterialIcons name="event-note" size={24} color="#FFD700" style={styles.buttonIcon} />
+        <Text style={styles.buttonTextAligned}>Attendance Report</Text>
       </TouchableOpacity>
 
       {/* Logout Button */}
@@ -45,11 +64,13 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     backgroundColor: '#fff',
-    alignItems:'center',
     padding: 20,
   },
   schoolIcon: {
-    marginTop: 40,
+    width: 100,
+    height: 100,
+    resizeMode: 'contain',
+    marginTop: 50,
     marginBottom: 20,
   },
   accountIcon: {
@@ -57,42 +78,55 @@ const styles = StyleSheet.create({
     top: 40,
     right: 20,
   },
+  userInfoContainer: {
+    backgroundColor: '#f0f0f0',
+    padding: 10,
+    borderRadius: 8,
+    borderColor: 'gray',
+    borderWidth: 1,
+    position: 'absolute',
+    top: 80,
+    right: 20,
+    width: 150,
+  },
+  userInfoText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: 'black',
+  },
   button: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'flex-start',
     backgroundColor: '#ffffff',
     borderColor: 'black',
     borderWidth: 1,
-    borderRadius: 8,
-    width: '80%',
+    borderRadius: 10,
+    width: '90%',
     paddingVertical: 15,
-    paddingHorizontal: 20,
     marginVertical: 10,
   },
-  icon: {
-    marginRight: 10,
+  buttonIcon: {
+    marginLeft: 15,
+    marginRight: 20,
   },
-  buttonText: {
+  buttonTextAligned: {
     color: 'black',
     fontSize: 18,
     fontWeight: 'bold',
+    textAlign: 'left',
+    flex: 1,
   },
-  iconContainer:{
-    marginTop:50,
-    marginBottom:20,
-  },
-  icon:{
-    width:200,
-    height:100,
+  iconContainer: {
+    alignItems: 'center',
   },
   logoutButton: {
     backgroundColor: 'black',
     paddingVertical: 15,
-    paddingHorizontal: 60,
+    paddingHorizontal: 50,
     borderRadius: 30,
-    position: 'absolute',
-    bottom: 30,
+    marginTop: 100,
+    width: '60%',
+    alignItems: 'center',
   },
   logoutText: {
     color: 'white',
