@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
     
   },
   title: {
-    color: 'black', // Use 'black' instead of black 
+    color: 'black',  
     fontSize: 24,
     fontWeight: 'bold',
     marginTop: 20,
@@ -61,8 +61,8 @@ const styles = StyleSheet.create({
     
   },
   link: {
-    color: 'blue', // Optional: Add a blue color to the link 
-    textDecorationLine: 'none', // Optional: Add underline for the link 
+    color: 'blue', 
+    textDecorationLine: 'none',
   },
 });
 

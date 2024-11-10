@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { Picker } from '@react-native-picker/picker';
-
+import { Link } from 'expo-router';
 const hatpic = require('../assets/images/wisdomhat.jpg');
 
 const AcademicDetailsScreen = () => {
@@ -9,16 +9,17 @@ const AcademicDetailsScreen = () => {
   const [course, setCourse] = useState('');
   const [venue, setVenue] = useState('');
   const [time, setTime] = useState('');
-  const [errors, setErrors] = useState({}); // Error state for each field
+  const [errors, setErrors] = useState({}); 
 
   const coursesByDepartment = {
     computing: [
-      { label: 'Software Engineering', value: 'COM3111' },
-      { label: 'Data Structures', value: 'COM2111' },
-      { label: 'Algorithms', value: 'COM2122' },
-      { label: 'Computer Security', value: 'COM3211' },
+      { label: 'Software Engineering', value: 'COM311' },
+      { label: 'Data Structures', value: 'COM211' },
+      { label: 'Algorithms', value: 'COM314' },
+      { label: 'Computer Security', value: 'COM315' },
     ],
     mathematics: [
+      { label: 'Calculus 1', value: 'MAT211' },
       { label: 'Calculus 2', value: 'MAT221' },
       { label: 'Matlab', value: 'MAT231' },
       { label: 'College Algebra', value: 'MAT211' },
@@ -50,7 +51,7 @@ const AcademicDetailsScreen = () => {
 
   const handleProceed = () => {
     if (validateFields()) {
-      // Proceed with the next steps if all fields are valid
+      
       console.log('All fields are valid, proceeding...');
     }
   };
@@ -61,13 +62,13 @@ const AcademicDetailsScreen = () => {
         <Image source={hatpic} style={styles.icon} />
       </View>
 
-      {/* Department Picker */}
+      {}
       <View style={styles.pickerContainer}>
         <Picker
           selectedValue={department}
           onValueChange={(itemValue) => {
             setDepartment(itemValue);
-            setCourse(''); // Reset course when department changes
+            setCourse(''); 
             setErrors({ ...errors, department: '' });
           }}
           style={styles.picker}
@@ -81,7 +82,7 @@ const AcademicDetailsScreen = () => {
         {errors.department && <Text style={styles.errorText}>{errors.department}</Text>}
       </View>
 
-      {/* Course Picker */}
+      {}
       <View style={styles.pickerContainer}>
         <Picker
           selectedValue={course}
@@ -129,15 +130,19 @@ const AcademicDetailsScreen = () => {
           style={styles.picker}
         >
           <Picker.Item label="TIME" value="" />
-          <Picker.Item label="9:00 AM" value="9am" />
-          <Picker.Item label="10:00 AM" value="10am" />
+          <Picker.Item label="08:30AM-11:30AM" value="08:30AM-11:30AM" />
+          <Picker.Item label="01:30PM-04:30PM" value="01:30PM-04:30PM" />
         </Picker>
         {errors.time && <Text style={styles.errorText}>{errors.time}</Text>}
       </View>
 
-      {/* Proceed Button */}
+      {}
       <TouchableOpacity style={styles.button} onPress={handleProceed}>
-        <Text style={styles.buttonText}>Proceed</Text>
+        <Text style={styles.buttonText}>
+        
+          Proceed
+          
+          </Text>
       </TouchableOpacity>
     </View>
   );
@@ -192,3 +197,4 @@ const styles = StyleSheet.create({
 });
 
 export default AcademicDetailsScreen;
+``
