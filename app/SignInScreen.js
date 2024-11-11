@@ -1,161 +1,105 @@
-import React, { useState } from "react";
-import { StatusBar } from "expo-status-bar";
-import {
-  View,
-  Image,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  ScrollView,
-  Alert,
-} from "react-native";
-import { useNavigation } from "@react-navigation/native";
-// Uncomment and configure your API instance as needed
-// import { create } from 'your-api-library';
-// const api = create({ baseURL: "http://192.168.38.206:3000/api/" });
+import React, { useState } from 'react';
+import { View, Text, TextInput, StyleSheet, Alert, TouchableOpacity, Image } from 'react-native';
+import { Link } from 'expo-router';
 
-const Sugn = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [feedbackSignal, setFeedbackSignal] = useState("1");
-  const navigation = useNavigation();
+const hatImage = require('../assets/gradHat.png');
 
-  const handleLogin = async () => {
-    if (!username || !password) {
-      Alert.alert("Error", "Please enter valid input for both username and password.");
-      return;
+const LoginScreen = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleLogin = () => {
+    if (email === '' || password === '') {
+      Alert.alert('Error', 'Please enter email and password');
+    } else {
+      Alert.alert('Success', 'Logged in successfully!');
+      // Add navigation or other successful login logic here
     }
-
-    try {
-      const response = await api.post("login", {
-        userName: username,
-        password: password,
-      });
-
-      const data = response.data;
-
-      if (data && data.userName === username) {
-        navigation.navigate("CourseSelection", {
-          Username: data.userName,
-          adminName: data.fullName,
-        });
-        console.log("Logging in with:", { username, password });
-      } else {
-        setFeedbackSignal("0");
-      }
-    } catch (error) {
-      console.error("Error during login:", error.message);
-      Alert.alert("Error", "An error occurred during login. Please try again.");
-    }
-  };
-
-  // Inline styles
-  const styles = {
-    window: {
-      flex: 1,
-      backgroundColor: '#FFFFFF',
-      padding: 20,
-    },
-    scroll: {
-      flex: 1,
-    },
-    firstView: {
-      alignItems: 'center',
-      marginBottom: 20,
-    },
-    h1: {
-      fontSize: 24,
-      fontWeight: 'bold',
-    },
-    input: {
-      height: 40,
-      borderColor: '080808',
-      borderWidth: 2,
-      paddingHorizontal: 10,
-      borderRadius: 5,
-    },
-    gap: {
-      height: 20,
-    },
-    buttonContainer: {
-      backgroundColor: '#000000',
-      padding: 5,
-      borderRadius: 5,
-      width: 200,
-      alignItems: 'center',
-      alignSelf: 'center',
-
-      
-    },
-    buttonText: {
-      color: '#fff',
-      fontWeight: 'bold',
-    },
-    notFound: {
-      color: 'red',
-      textAlign: 'center',
-    },
-    imagelogo: {
-        paddingLeft: 550,
-        alignItems: 'centre'
-    },
-    image: {
-        width: 200,
-        height: 200,
-        alignItems: 'centre',
-    },
   };
 
   return (
-    <View style={styles.window}>
-        <View style={styles.imagelogo}>
-        <Image
-          source={{ uri: "https://i.pinimg.com/236x/8f/7c/c7/8f7cc771e974e3d6ed6d2e6acbdb549d.jpg" }} // Use your image URI here
-          style={styles.image}
-        />
-        </View>
-      <ScrollView style={styles.scroll}>
-      
-        <View style={styles.firstView}>
-        
-          <StatusBar style="auto" />
-          <Text style={styles.h1}>SIGN IN</Text>
-        </View>
-        <View style={styles.gap} />
-        
-        <TextInput
-          style={styles.input}
-          placeholder="E-mail"
-          placeholderTextColor="#644F4F"
-          onChangeText={setUsername}
-        />
-        <View style={styles.gap} />
-        
-        <TextInput
-          style={styles.input}
-          placeholder="Password"
-          placeholderTextColor="#644F4F"
-          secureTextEntry={true}
-          onChangeText={setPassword}
-        />
-        
-        {feedbackSignal === "0" && (
-          <Text style={styles.notFound}>
-            Access Denied!! Incorrect credentials
-          </Text>
-        )}
-        
-        <View style={styles.gap} />
-        
-        <TouchableOpacity
-          style={styles.buttonContainer}
-          onPress={handleLogin}
-        >
-          <Text style={styles.buttonText}>Login</Text>
-        </TouchableOpacity>
-      </ScrollView>
+    <View style={styles.container}>
+      <Image source={hatImage} style={styles.icon} />
+      <Text style={styles.title}>Login</Text>
+
+      <TextInput
+        style={styles.input}
+        placeholder="Email"
+        value={email}
+        onChangeText={setEmail}
+        keyboardType="email-address"
+        autoCapitalize="none"
+      />
+
+      <TextInput
+        style={styles.input}
+        placeholder="Password"
+        value={password}
+        onChangeText={setPassword}
+        secureTextEntry
+      />
+
+      <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Text style={styles.buttonText}>Log In</Text>
+      </TouchableOpacity>
+
+      <Link href="/SignUpScreen" style={styles.link}>
+        Don’t have an account? <Text style={styles.linkText}>Sign Up</Text>
+      </Link>
     </View>
   );
 };
 
-export default Sugn;
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    padding: 20,
+  },
+  icon: {
+    width: 100,
+    height: 100,
+    marginBottom: 20,
+  },
+  title: {
+    fontSize: 26,
+    fontWeight: 'bold',
+    marginBottom: 20,
+    color: '#333',
+  },
+  input: {
+    width: '100%',
+    height: 50,
+    borderColor: '#ccc',
+    borderWidth: 1,
+    borderRadius: 8,
+    paddingHorizontal: 15,
+    marginBottom: 15,
+    backgroundColor: '#f9f9f9',
+  },
+  button: {
+    backgroundColor: 'black',
+    paddingVertical: 15,
+    paddingHorizontal: 50,
+    borderRadius: 8,
+    marginTop: 20,
+  },
+  buttonText: {
+    color: '#fff',
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  link: {
+    marginTop: 20,
+    fontSize: 16,
+    textDecorationLine: 'nounderline',
+  },
+  linkText: {
+    color: 'black',
+    fontWeight: 'bold',
+  },
+});
+
+export default LoginScreen;
