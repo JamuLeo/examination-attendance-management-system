@@ -1,37 +1,37 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { Picker } from '@react-native-picker/picker';
-import { Link } from 'expo-router';
-const hatpic = require('../assets/images/wisdomhat.jpg');
+import React, { useState } from "react";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { Picker } from "@react-native-picker/picker";
+import { Link } from "expo-router";
+const hatpic = require("../assets/images/wisdomhat.jpg");
 
 const AcademicDetailsScreen = () => {
-  const [department, setDepartment] = useState('');
-  const [course, setCourse] = useState('');
-  const [venue, setVenue] = useState('');
-  const [time, setTime] = useState('');
-  const [errors, setErrors] = useState({}); 
+  const [department, setDepartment] = useState("");
+  const [course, setCourse] = useState("");
+  const [venue, setVenue] = useState("");
+  const [time, setTime] = useState("");
+  const [errors, setErrors] = useState({});
 
   const coursesByDepartment = {
     computing: [
-      { label: 'Software Engineering', value: 'COM311' },
-      { label: 'Data Structures', value: 'COM211' },
-      { label: 'Algorithms', value: 'COM314' },
-      { label: 'Computer Security', value: 'COM315' },
+      { label: "Software Engineering", value: "COM311" },
+      { label: "Data Structures", value: "COM211" },
+      { label: "Algorithms", value: "COM314" },
+      { label: "Computer Security", value: "COM315" },
     ],
     mathematics: [
-      { label: 'Calculus 1', value: 'MAT211' },
-      { label: 'Calculus 2', value: 'MAT221' },
-      { label: 'Matlab', value: 'MAT231' },
-      { label: 'College Algebra', value: 'MAT211' },
+      { label: "Calculus 1", value: "MAT211" },
+      { label: "Calculus 2", value: "MAT221" },
+      { label: "Matlab", value: "MAT231" },
+      { label: "College Algebra", value: "MAT211" },
     ],
-    'physics and electronics': [
-      { label: 'Electricity and Magnetism', value: 'PHY121' },
-      { label: 'Quantum Mechanics', value: 'PHY321' },
+    "physics and electronics": [
+      { label: "Electricity and Magnetism", value: "PHY121" },
+      { label: "Quantum Mechanics", value: "PHY321" },
     ],
-    'economics,law and government': [
-      { label: 'Financial Accounting', value: 'ACC101' },
-      { label: 'Econometrics', value: 'ECO201' },
-      { label: 'Microeconomics', value: 'ECO211' },
+    "economics,law and government": [
+      { label: "Financial Accounting", value: "ACC101" },
+      { label: "Econometrics", value: "ECO201" },
+      { label: "Microeconomics", value: "ECO211" },
     ],
   };
 
@@ -41,18 +41,17 @@ const AcademicDetailsScreen = () => {
 
   const validateFields = () => {
     const newErrors = {};
-    if (!department) newErrors.department = 'Please select a department';
-    if (!course) newErrors.course = 'Please select a course';
-    if (!venue) newErrors.venue = 'Please select a venue';
-    if (!time) newErrors.time = 'Please select a time';
+    if (!department) newErrors.department = "Please select a department";
+    if (!course) newErrors.course = "Please select a course";
+    if (!venue) newErrors.venue = "Please select a venue";
+    if (!time) newErrors.time = "Please select a time";
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleProceed = () => {
     if (validateFields()) {
-      
-      console.log('All fields are valid, proceeding...');
+      console.log("All fields are valid, proceeding...");
     }
   };
 
@@ -68,18 +67,26 @@ const AcademicDetailsScreen = () => {
           selectedValue={department}
           onValueChange={(itemValue) => {
             setDepartment(itemValue);
-            setCourse(''); 
-            setErrors({ ...errors, department: '' });
+            setCourse("");
+            setErrors({ ...errors, department: "" });
           }}
           style={styles.picker}
         >
           <Picker.Item label="DEPARTMENT" value="" />
           <Picker.Item label="Computing" value="computing" />
           <Picker.Item label="Mathematics" value="mathematics" />
-          <Picker.Item label="Physics and Electronics" value="physics and electronics" />
-          <Picker.Item label="Economics, Law and Government" value="economics,law and government" />
+          <Picker.Item
+            label="Physics and Electronics"
+            value="physics and electronics"
+          />
+          <Picker.Item
+            label="Economics, Law and Government"
+            value="economics,law and government"
+          />
         </Picker>
-        {errors.department && <Text style={styles.errorText}>{errors.department}</Text>}
+        {errors.department && (
+          <Text style={styles.errorText}>{errors.department}</Text>
+        )}
       </View>
 
       {}
@@ -88,14 +95,18 @@ const AcademicDetailsScreen = () => {
           selectedValue={course}
           onValueChange={(itemValue) => {
             setCourse(itemValue);
-            setErrors({ ...errors, course: '' });
+            setErrors({ ...errors, course: "" });
           }}
           style={styles.picker}
           enabled={!!department}
         >
           <Picker.Item label="COURSE" value="" />
           {getCourseOptions().map((courseOption) => (
-            <Picker.Item label={courseOption.label} value={courseOption.value} key={courseOption.value} />
+            <Picker.Item
+              label={courseOption.label}
+              value={courseOption.value}
+              key={courseOption.value}
+            />
           ))}
         </Picker>
         {errors.course && <Text style={styles.errorText}>{errors.course}</Text>}
@@ -107,13 +118,16 @@ const AcademicDetailsScreen = () => {
           selectedValue={venue}
           onValueChange={(itemValue) => {
             setVenue(itemValue);
-            setErrors({ ...errors, venue: '' });
+            setErrors({ ...errors, venue: "" });
           }}
           style={styles.picker}
         >
           <Picker.Item label="VENUE" value="" />
           <Picker.Item label="Mwambo 1" value="Mwambo 1" />
-          <Picker.Item label="Wadonda Lecturer Theatre" value="Wadonda Lecturer Theatre" />
+          <Picker.Item
+            label="Wadonda Lecturer Theatre"
+            value="Wadonda Lecturer Theatre"
+          />
           <Picker.Item label="Great Hall" value="Great Hall" />
         </Picker>
         {errors.venue && <Text style={styles.errorText}>{errors.venue}</Text>}
@@ -125,7 +139,7 @@ const AcademicDetailsScreen = () => {
           selectedValue={time}
           onValueChange={(itemValue) => {
             setTime(itemValue);
-            setErrors({ ...errors, time: '' });
+            setErrors({ ...errors, time: "" });
           }}
           style={styles.picker}
         >
@@ -138,11 +152,9 @@ const AcademicDetailsScreen = () => {
 
       {}
       <TouchableOpacity style={styles.button} onPress={handleProceed}>
-        <Text style={styles.buttonText}>
-        
-          Proceed
-          
-          </Text>
+        <Link href="/MenuOptionsScreen">
+          <Text style={styles.buttonText}>Proceed</Text>
+        </Link>
       </TouchableOpacity>
     </View>
   );
@@ -151,8 +163,8 @@ const AcademicDetailsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+    backgroundColor: "#fff",
+    alignItems: "center",
     padding: 20,
   },
   iconContainer: {
@@ -164,37 +176,37 @@ const styles = StyleSheet.create({
     height: 100,
   },
   pickerContainer: {
-    width: '100%',
-    backgroundColor: '#fff',
+    width: "100%",
+    backgroundColor: "#fff",
     borderRadius: 8,
     marginBottom: 10,
     borderWidth: 1,
-    borderColor: '#000',
+    borderColor: "#000",
     paddingHorizontal: 10,
   },
   picker: {
     height: 50,
-    color: '#000',
+    color: "#000",
   },
   errorText: {
-    color: 'red',
+    color: "red",
     fontSize: 12,
     marginTop: 4,
     marginBottom: 10, // Adds space between error and the next field
   },
   button: {
-    backgroundColor: '#000',
+    backgroundColor: "#000",
     paddingVertical: 15,
     paddingHorizontal: 40,
     borderRadius: 8,
     marginTop: 20,
   },
   buttonText: {
-    color: '#fff',
+    color: "#fff",
     fontSize: 18,
-    fontWeight: 'bold',
+    fontWeight: "bold",
   },
 });
 
 export default AcademicDetailsScreen;
-``
+``;
