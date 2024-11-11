@@ -78,10 +78,14 @@ const Sugn = () => {
       height: 20,
     },
     buttonContainer: {
-      backgroundColor: '#005500',
+      backgroundColor: '#000000',
       padding: 5,
       borderRadius: 5,
+      width: 200,
       alignItems: 'center',
+      alignSelf: 'center',
+
+      
     },
     buttonText: {
       color: '#fff',
