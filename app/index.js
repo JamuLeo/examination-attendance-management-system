@@ -1,31 +1,12 @@
-import { View, StyleSheet } from "react-native";
-import { Link } from "expo-router";
+import { View, Text } from "react-native";
+import React from "react";
 
-export default function Index() {
+const Index = () => {
   return (
-    <View style={styles.container}>
-      <Link href="/CheckInOut" style={styles.button}>
-        CHEKIN
-      </Link>
-      <Link href="/CheckInOut" style={styles.button}>
-        CHECKOUT
-      </Link>
+    <View>
+      <Text>index</Text>
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#FFFFFF",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  button: {
-    fontSize: 30,
-    textDecorationLine: "underline",
-    color: "#000000",
-    fontWeight: "bold",
-  },
-});
+export default Index;
