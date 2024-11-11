@@ -6,6 +6,19 @@ const homeimage = require('../assets/images/home.jpeg');
 const HomeScreen =() => {
   return (
     <View style={styles.container}>
+    <Image source={homeimage} style={styles.logo} /> 
+    <Text style={styles.title}>Students</Text>
+    <Text style={styles.titl1}> Exam Attendance</Text>
+    <TouchableOpacity style={styles.button}>
+      <Text style={styles.buttonText}>
+      <Link href="/SignInScreen" >
+      Get Started!
+      </Link></Text>
+      
+    </TouchableOpacity>
+  </View>
+);
+};
 
 const styles = StyleSheet.create({
   container: {
