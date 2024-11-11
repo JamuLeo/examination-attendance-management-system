@@ -7,7 +7,7 @@ export default function Index() {
   return (
     <View style={styles.container}>
       <Text style={styles.text}>Add first component here</Text>
-      <Link href="/Next" style={styles.button}>
+      <Link href="/SignInScreen" style={styles.button}>
         go to next component
       </Link>
     </View>
