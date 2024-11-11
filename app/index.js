@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { Link } from 'expo-router';
 const homeimage = require('../assets/images/home.jpeg');
 
-const HomeScreen =() => {
+const Index =() => {
   return (
     <View style={styles.container}>
     <Image source={homeimage} style={styles.logo} /> 
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default Index;
