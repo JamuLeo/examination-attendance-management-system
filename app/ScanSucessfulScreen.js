@@ -1,9 +1,16 @@
-// index.js
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'; // Make sure to install this package if you don't have it
+import { useNavigation } from '@react-navigation/native'; // If using navigation
 
 const ScanSuccessful = () => {
+  const navigation = useNavigation();
+
+  const handleScanNextID = () => {
+    // Navigate to ScanScreen or reset the scanning process
+    navigation.navigate("ScanScreen"); // Replace "ScanScreen" with the actual screen name for scanning
+  };
+
   return (
     <View className="flex-1 items-center justify-center bg-[#EAEAF9]">
       {/* Tick Icon */}
@@ -16,7 +23,7 @@ const ScanSuccessful = () => {
       <Text className="text-lg mt-2 text-black">Checked-in</Text>
 
       {/* "Scan Next ID" Button */}
-      <TouchableOpacity className="mt-8 px-6 py-3 bg-black rounded-full">
+      <TouchableOpacity onPress={handleScanNextID} className="mt-8 px-6 py-3 bg-black rounded-full">
         <Text className="text-white text-lg font-semibold">Scan Next ID</Text>
       </TouchableOpacity>
     </View>
@@ -24,9 +31,3 @@ const ScanSuccessful = () => {
 };
 
 export default ScanSuccessful;
-
-
-
-
-
-
