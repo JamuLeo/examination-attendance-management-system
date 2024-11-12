@@ -40,7 +40,10 @@ const LoginScreen = () => {
       />
 
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
+        <Link href="/AcademicDetailsScreen">
         <Text style={styles.buttonText}>Log In</Text>
+        </Link>
+       
       </TouchableOpacity>
 
       <Link href="/SignUpScreen" style={styles.link}>
