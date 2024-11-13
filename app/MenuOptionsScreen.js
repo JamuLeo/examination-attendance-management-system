@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
+import { Link } from 'expo-router';
 import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 import { FontAwesome5, MaterialIcons, Entypo } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
 
 const pic = require('../assets/images/wisdomhat.jpg');
 
 const MenuOptionsScreen
  = () => {
   const [showUserInfo, setShowUserInfo] = useState(false);
+  const navigation = useNavigation();
 
   // Dummy data for demonstration
   const dummyUserData = {
     name: 'Sifiso Chitowe',
+  };
+  const handleLogout = () => {
+    navigation.navigate('index'); // Redirect to index.js
   };
 
   return (
@@ -37,13 +43,13 @@ const MenuOptionsScreen
       {/* Check In Button */}
       <TouchableOpacity style={styles.button}>
         <FontAwesome5 name="clock" size={24} color="#0000FF" style={styles.buttonIcon} />
-        <Text style={styles.buttonTextAligned}>Check In</Text>
+       <Link href="/CheckInOut"> <Text style={styles.buttonTextAligned}>Check In</Text></Link>
       </TouchableOpacity>
 
       {/* Check Out Button */}
       <TouchableOpacity style={styles.button}>
         <Entypo name="log-out" size={24} color="#1E90FF" style={styles.buttonIcon} />
-        <Text style={styles.buttonTextAligned}>Check Out</Text>
+        <Link href="/CheckInOut"><Text style={styles.buttonTextAligned}>Check Out</Text></Link>
       </TouchableOpacity>
 
       {/* Attendance Report Button */}
@@ -53,9 +59,10 @@ const MenuOptionsScreen
       </TouchableOpacity>
 
       {/* Logout Button */}
-      <TouchableOpacity style={styles.logoutButton}>
+      <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
         <Text style={styles.logoutText}>Log out</Text>
       </TouchableOpacity>
+      
     </View>
   );
 };
@@ -68,8 +75,8 @@ const styles = StyleSheet.create({
     padding: 20,
   },
   schoolIcon: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
     resizeMode: 'contain',
     marginTop: 50,
     marginBottom: 20,

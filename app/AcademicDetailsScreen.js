@@ -1,8 +1,9 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, Image, Alert } from "react-native";
 import { Picker } from "@react-native-picker/picker";
-import { Link } from "expo-router";
-const hatpic = require("../assets/images/wisdomhat.jpg");
+import { useNavigation } from "@react-navigation/native";
+
+const pic = require('../assets/images/wisdomhat.jpg');
 
 const AcademicDetailsScreen = () => {
   const [department, setDepartment] = useState("");
@@ -10,6 +11,7 @@ const AcademicDetailsScreen = () => {
   const [venue, setVenue] = useState("");
   const [time, setTime] = useState("");
   const [errors, setErrors] = useState({});
+  const navigation = useNavigation();
 
   const coursesByDepartment = {
     computing: [
@@ -52,16 +54,19 @@ const AcademicDetailsScreen = () => {
   const handleProceed = () => {
     if (validateFields()) {
       console.log("All fields are valid, proceeding...");
+      navigation.navigate("MenuOptionsScreen");
+    } else {
+      Alert.alert("Incomplete Selection", "Please select all options to proceed.");
     }
   };
 
   return (
     <View style={styles.container}>
-      <View style={styles.iconContainer}>
-        <Image source={hatpic} style={styles.icon} />
-      </View>
+      
+        <Image source={pic} style={styles.icon} />
+      
 
-      {}
+      {/* Department Picker */}
       <View style={styles.pickerContainer}>
         <Picker
           selectedValue={department}
@@ -75,21 +80,13 @@ const AcademicDetailsScreen = () => {
           <Picker.Item label="DEPARTMENT" value="" />
           <Picker.Item label="Computing" value="computing" />
           <Picker.Item label="Mathematics" value="mathematics" />
-          <Picker.Item
-            label="Physics and Electronics"
-            value="physics and electronics"
-          />
-          <Picker.Item
-            label="Economics, Law and Government"
-            value="economics,law and government"
-          />
+          <Picker.Item label="Physics and Electronics" value="physics and electronics" />
+          <Picker.Item label="Economics, Law and Government" value="economics,law and government" />
         </Picker>
-        {errors.department && (
-          <Text style={styles.errorText}>{errors.department}</Text>
-        )}
+        {errors.department && <Text style={styles.errorText}>{errors.department}</Text>}
       </View>
 
-      {}
+      {/* Course Picker */}
       <View style={styles.pickerContainer}>
         <Picker
           selectedValue={course}
@@ -124,10 +121,7 @@ const AcademicDetailsScreen = () => {
         >
           <Picker.Item label="VENUE" value="" />
           <Picker.Item label="Mwambo 1" value="Mwambo 1" />
-          <Picker.Item
-            label="Wadonda Lecturer Theatre"
-            value="Wadonda Lecturer Theatre"
-          />
+          <Picker.Item label="Wadonda Lecturer Theatre" value="Wadonda Lecturer Theatre" />
           <Picker.Item label="Great Hall" value="Great Hall" />
         </Picker>
         {errors.venue && <Text style={styles.errorText}>{errors.venue}</Text>}
@@ -150,11 +144,9 @@ const AcademicDetailsScreen = () => {
         {errors.time && <Text style={styles.errorText}>{errors.time}</Text>}
       </View>
 
-      {}
+      {/* Proceed Button */}
       <TouchableOpacity style={styles.button} onPress={handleProceed}>
-        <Link href="/MenuOptionsScreen">
-          <Text style={styles.buttonText}>Proceed</Text>
-        </Link>
+        <Text style={styles.buttonText}>Proceed</Text>
       </TouchableOpacity>
     </View>
   );
@@ -163,17 +155,18 @@ const AcademicDetailsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
     padding: 20,
+    paddingBottom:120,
   },
-  iconContainer: {
-    marginTop: 50,
-    marginBottom: 20,
-  },
+  
   icon: {
     width: 200,
-    height: 100,
+    height: 200,
+    resizeMode: 'contain',
+    
   },
   pickerContainer: {
     width: "100%",
@@ -192,7 +185,7 @@ const styles = StyleSheet.create({
     color: "red",
     fontSize: 12,
     marginTop: 4,
-    marginBottom: 10, // Adds space between error and the next field
+    marginBottom: 10,
   },
   button: {
     backgroundColor: "#000",
@@ -209,4 +202,3 @@ const styles = StyleSheet.create({
 });
 
 export default AcademicDetailsScreen;
-``;

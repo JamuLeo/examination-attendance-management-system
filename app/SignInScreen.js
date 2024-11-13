@@ -1,25 +1,26 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, StyleSheet, Alert, TouchableOpacity, Image } from 'react-native';
-import { Link } from 'expo-router';
+import { useNavigation } from '@react-navigation/native';
 
-const hatImage = require('../assets/gradHat.png');
+const pic = require('../assets/images/wisdomhat.jpg');
 
 const LoginScreen = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const navigation = useNavigation();
 
   const handleLogin = () => {
     if (email === '' || password === '') {
       Alert.alert('Error', 'Please enter email and password');
     } else {
-      Alert.alert('Success', 'Logged in successfully!');
-      // Add navigation or other successful login logic here
+      // Navigate to AcademicDetailsScreen if email and password are provided
+      navigation.navigate('AcademicDetailsScreen');
     }
   };
 
   return (
     <View style={styles.container}>
-      <Image source={hatImage} style={styles.icon} />
+      <Image source={pic} style={styles.icon} />
       <Text style={styles.title}>Login</Text>
 
       <TextInput
@@ -40,15 +41,15 @@ const LoginScreen = () => {
       />
 
       <TouchableOpacity style={styles.button} onPress={handleLogin}>
-        <Link href="/AcademicDetailsScreen">
         <Text style={styles.buttonText}>Log In</Text>
-        </Link>
-       
       </TouchableOpacity>
 
-      <Link href="/SignUpScreen" style={styles.link}>
-        Don’t have an account? <Text style={styles.linkText}>Sign Up</Text>
-      </Link>
+      <Text style={styles.link}>
+        Don’t have an account?{' '}
+        <Text style={styles.linkText} onPress={() => navigation.navigate('SignUpScreen')}>
+          Sign Up
+        </Text>
+      </Text>
     </View>
   );
 };
@@ -60,10 +61,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
     padding: 20,
+    paddingBottom:120,
   },
   icon: {
-    width: 100,
-    height: 100,
+    width: 200,
+    height: 200,
+    resizeMode: 'contain',
+    marginTop: 50,
     marginBottom: 20,
   },
   title: {
@@ -97,11 +101,11 @@ const styles = StyleSheet.create({
   link: {
     marginTop: 20,
     fontSize: 16,
-    textDecorationLine: 'nounderline',
   },
   linkText: {
     color: 'black',
     fontWeight: 'bold',
+    textDecorationLine: 'nounderline',
   },
 });
 
