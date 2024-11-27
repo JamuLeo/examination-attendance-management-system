@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Camera, CameraView } from "expo-camera";
-import { Stack } from "expo-router";
 import {
   AppState,
   Platform,
@@ -9,25 +7,19 @@ import {
   StyleSheet,
   Text,
   View,
+  ActivityIndicator,
 } from "react-native";
+import { CameraView } from "expo-camera"; // Remove Camera import since it's not used
+import { Stack, useRouter } from "expo-router"; // Import useRouter for navigation
 import { Overlay } from "./Overlay";
 
-// Change the keys in the studentDatabase to strings
-const studentDatabase = {
-  MWI009K7X0CH: "HASSAN ZAMINI",
-  "BSC/44/21": "Hassan Zamini",
-  654321: "Jane Smith",
-  // Add more mappings as needed
-};
-
-// Predefined valid names
-const validNames = ["HASSAN ZAMINI", "Hassan Zamini", "Jane Smith"];
-
 export default function Home() {
+  const router = useRouter(); // Initialize useRouter for navigation
   const qrLock = useRef(false);
   const appState = useRef(AppState.currentState);
   const [studentName, setStudentName] = useState(null);
   const [isCameraActive, setIsCameraActive] = useState(true);
+  const [scanned, setScanned] = useState(false);
 
   useEffect(() => {
     const subscription = AppState.addEventListener("change", (nextAppState) => {
@@ -39,42 +31,57 @@ export default function Home() {
       }
       appState.current = nextAppState;
     });
-
     return () => {
       subscription.remove();
     };
   }, []);
 
-  const handleBarcodeScanned = (data) => {
-    console.log("Scanned data:", data); // Log scanned data for debugging
-
-    if (data && !qrLock.current) {
-      qrLock.current = true;
-
-      // Retrieve the student name from the database
-      const name = studentDatabase[data]; // data should be a string now
-      console.log("Retrieved name from database:", name); // Log retrieved name
-
-      if (name) {
-        // Check if the name is in the predefined valid names
-        if (validNames.includes(name)) {
-          setStudentName(`${name} is registered!`);
-        } else {
-          setStudentName("Student not registered!");
-        }
-        setIsCameraActive(false); // Stop the camera
-      } else {
-        setStudentName("Student not found!");
+  // Fetch data from Google Sheets
+  const scanedstudent = async (regNumber) => {
+    try {
+      const response = await fetch(
+        `https://sheets.googleapis.com/v4/spreadsheets/1OkMkP_5oeSt8Y8l82afCoj2L1y1Jab8aIbB9_MK-EgU/values/Sheet1!A:B?key=AIzaSyB0-Y_ysx3BjiuqIPAse9AFvwijTEUgR2Y`
+      );
+      const data = await response.json(); // Extract JSON response
+      if (!data.values || data.values.length === 0) {
+        console.log("No data found in the Google Sheet.");
+        setStudentName("No student data available!");
+        return;
       }
-
-      // Optional: You can set a timeout to reset the state
-      setTimeout(() => {
-        setStudentName(null);
-        setIsCameraActive(true);
-        qrLock.current = false; // Reset the QR lock
-      }, 3000); // Feedback duration
+      const rows = data.values.slice(1); // Skip header row
+      // Check if the scanned regNumber exists in the data
+      const studentFound = rows.find((row) => row[0] === regNumber);
+      if (studentFound) {
+        const studentName = studentFound[1];
+        console.log(`${studentName} has attended.`);
+        setStudentName(`${studentName} is registered!`);
+        // Navigate to ScanSuccessful screen immediately after success
+        router.push("/scanner/ScanSuccessful");
+      } else {
+        console.log("Student not found in the database.");
+        setStudentName("Student not found!");
+        // Navigate to ScanUnsuccessful screen
+        router.push("/scanner/ScanUnsuccessful");
+      }
+    } catch (error) {
+      console.error("Error occurred:", error);
     }
   };
+
+  const handleBarCodeScanned = async ({ data }) => {
+    if (!scanned) {
+      // Only allow scanning once
+      setScanned(true);
+      await scanedstudent(data.trim()); // Trim whitespace for cleaner input
+    }
+  };
+
+  if (isCameraActive === null) {
+    return <ActivityIndicator size="large" />;
+  }
+  if (isCameraActive === false) {
+    return <Text>No access to camera</Text>;
+  }
 
   return (
     <SafeAreaView style={StyleSheet.absoluteFillObject}>
@@ -89,7 +96,7 @@ export default function Home() {
         <CameraView
           style={StyleSheet.absoluteFillObject}
           facing="back"
-          onBarcodeScanned={({ data }) => handleBarcodeScanned(data)}
+          onBarcodeScanned={(event) => handleBarCodeScanned(event)} // Pass event directly
         />
       )}
       <Overlay />

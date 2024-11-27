@@ -1,9 +1,17 @@
 import React, { useState } from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image, Alert } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  Alert,
+} from "react-native";
+import { Link } from "expo-router";
 import { Picker } from "@react-native-picker/picker";
 import { useNavigation } from "@react-navigation/native";
 
-const pic = require('../assets/images/wisdomhat.jpg');
+const pic = require("../assets/images/wisdomhat.jpg");
 
 const AcademicDetailsScreen = () => {
   const [department, setDepartment] = useState("");
@@ -56,15 +64,16 @@ const AcademicDetailsScreen = () => {
       console.log("All fields are valid, proceeding...");
       navigation.navigate("MenuOptionsScreen");
     } else {
-      Alert.alert("Incomplete Selection", "Please select all options to proceed.");
+      Alert.alert(
+        "Incomplete Selection",
+        "Please select all options to proceed."
+      );
     }
   };
 
   return (
     <View style={styles.container}>
-      
-        <Image source={pic} style={styles.icon} />
-      
+      <Image source={pic} style={styles.icon} />
 
       {/* Department Picker */}
       <View style={styles.pickerContainer}>
@@ -80,10 +89,18 @@ const AcademicDetailsScreen = () => {
           <Picker.Item label="DEPARTMENT" value="" />
           <Picker.Item label="Computing" value="computing" />
           <Picker.Item label="Mathematics" value="mathematics" />
-          <Picker.Item label="Physics and Electronics" value="physics and electronics" />
-          <Picker.Item label="Economics, Law and Government" value="economics,law and government" />
+          <Picker.Item
+            label="Physics and Electronics"
+            value="physics and electronics"
+          />
+          <Picker.Item
+            label="Economics, Law and Government"
+            value="economics,law and government"
+          />
         </Picker>
-        {errors.department && <Text style={styles.errorText}>{errors.department}</Text>}
+        {errors.department && (
+          <Text style={styles.errorText}>{errors.department}</Text>
+        )}
       </View>
 
       {/* Course Picker */}
@@ -121,7 +138,10 @@ const AcademicDetailsScreen = () => {
         >
           <Picker.Item label="VENUE" value="" />
           <Picker.Item label="Mwambo 1" value="Mwambo 1" />
-          <Picker.Item label="Wadonda Lecturer Theatre" value="Wadonda Lecturer Theatre" />
+          <Picker.Item
+            label="Wadonda Lecturer Theatre"
+            value="Wadonda Lecturer Theatre"
+          />
           <Picker.Item label="Great Hall" value="Great Hall" />
         </Picker>
         {errors.venue && <Text style={styles.errorText}>{errors.venue}</Text>}
@@ -155,18 +175,17 @@ const AcademicDetailsScreen = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
     padding: 20,
-    paddingBottom:120,
+    paddingBottom: 120,
   },
-  
+
   icon: {
     width: 200,
     height: 200,
-    resizeMode: 'contain',
-    
+    resizeMode: "contain",
   },
   pickerContainer: {
     width: "100%",

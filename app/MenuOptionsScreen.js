@@ -1,22 +1,17 @@
-import React, { useState } from 'react';
-import { Link } from 'expo-router';
-import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
-import { FontAwesome5, MaterialIcons, Entypo } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
+import React, { useState } from "react";
+import { Link } from "expo-router";
+import { View, Text, TouchableOpacity, StyleSheet, Image } from "react-native";
+import { FontAwesome5, MaterialIcons, Entypo } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
-const pic = require('../assets/images/wisdomhat.jpg');
+const pic = require("../assets/images/wisdomhat.jpg");
 
-const MenuOptionsScreen
- = () => {
+const MenuOptionsScreen = () => {
   const [showUserInfo, setShowUserInfo] = useState(false);
   const navigation = useNavigation();
 
-  // Dummy data for demonstration
-  const dummyUserData = {
-    name: 'Sifiso Chitowe',
-  };
   const handleLogout = () => {
-    navigation.navigate('index'); // Redirect to index.js
+    navigation.navigate("index"); // Redirect to index.js
   };
 
   return (
@@ -29,9 +24,7 @@ const MenuOptionsScreen
       <TouchableOpacity
         style={styles.accountIcon}
         onPress={() => setShowUserInfo(!showUserInfo)}
-      >
-        <MaterialIcons name="account-circle" size={30} color="black" />
-      </TouchableOpacity>
+      ></TouchableOpacity>
 
       {/* Dummy Data - User Info */}
       {showUserInfo && (
@@ -42,27 +35,48 @@ const MenuOptionsScreen
 
       {/* Check In Button */}
       <TouchableOpacity style={styles.button}>
-        <FontAwesome5 name="clock" size={24} color="#0000FF" style={styles.buttonIcon} />
-       <Link href="/CheckInOut"> <Text style={styles.buttonTextAligned}>Check In</Text></Link>
+        <FontAwesome5
+          name="clock"
+          size={24}
+          color="#0000FF"
+          style={styles.buttonIcon}
+        />
+        <Link href="/CheckInOut">
+          {" "}
+          <Text style={styles.buttonTextAligned}>Check In</Text>
+        </Link>
       </TouchableOpacity>
 
       {/* Check Out Button */}
       <TouchableOpacity style={styles.button}>
-        <Entypo name="log-out" size={24} color="#1E90FF" style={styles.buttonIcon} />
-        <Link href="/CheckInOut"><Text style={styles.buttonTextAligned}>Check Out</Text></Link>
+        <Entypo
+          name="log-out"
+          size={24}
+          color="#1E90FF"
+          style={styles.buttonIcon}
+        />
+        <Link href="/CheckInOut">
+          <Text style={styles.buttonTextAligned}>Check Out</Text>
+        </Link>
       </TouchableOpacity>
 
       {/* Attendance Report Button */}
       <TouchableOpacity style={styles.button}>
-        <MaterialIcons name="event-note" size={24} color="#FFD700" style={styles.buttonIcon} />
-        <Text style={styles.buttonTextAligned}>Attendance Report</Text>
+        <MaterialIcons
+          name="event-note"
+          size={24}
+          color="#FFD700"
+          style={styles.buttonIcon}
+        />
+        <Link href="/AttendanceReport">
+          <Text style={styles.buttonTextAligned}>Attendance Report</Text>
+        </Link>
       </TouchableOpacity>
 
       {/* Logout Button */}
       <TouchableOpacity style={styles.logoutButton} onPress={handleLogout}>
         <Text style={styles.logoutText}>Log out</Text>
       </TouchableOpacity>
-      
     </View>
   );
 };
@@ -70,46 +84,46 @@ const MenuOptionsScreen
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    alignItems: "center",
+    backgroundColor: "#fff",
     padding: 20,
   },
   schoolIcon: {
     width: 200,
     height: 200,
-    resizeMode: 'contain',
+    resizeMode: "contain",
     marginTop: 50,
     marginBottom: 20,
   },
   accountIcon: {
-    position: 'absolute',
+    position: "absolute",
     top: 40,
     right: 20,
   },
   userInfoContainer: {
-    backgroundColor: '#f0f0f0',
+    backgroundColor: "#f0f0f0",
     padding: 10,
     borderRadius: 8,
-    borderColor: 'gray',
+    borderColor: "gray",
     borderWidth: 1,
-    position: 'absolute',
+    position: "absolute",
     top: 80,
     right: 20,
     width: 150,
   },
   userInfoText: {
     fontSize: 16,
-    fontWeight: 'bold',
-    color: 'black',
+    fontWeight: "bold",
+    color: "black",
   },
   button: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#ffffff',
-    borderColor: 'black',
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#ffffff",
+    borderColor: "black",
     borderWidth: 1,
     borderRadius: 10,
-    width: '90%',
+    width: "90%",
     paddingVertical: 15,
     marginVertical: 10,
   },
@@ -118,31 +132,28 @@ const styles = StyleSheet.create({
     marginRight: 20,
   },
   buttonTextAligned: {
-    color: 'black',
+    color: "black",
     fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'left',
+    fontWeight: "bold",
+    textAlign: "left",
     flex: 1,
   },
   iconContainer: {
-    alignItems: 'center',
+    alignItems: "center",
   },
   logoutButton: {
-    backgroundColor: 'black',
+    backgroundColor: "#000",
     paddingVertical: 15,
-    paddingHorizontal: 50,
-    borderRadius: 30,
-    marginTop: 100,
-    width: '60%',
-    alignItems: 'center',
+    paddingHorizontal: 40,
+    borderRadius: 8,
+    marginTop: 20,
   },
   logoutText: {
-    color: 'white',
+    color: "white",
     fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    fontWeight: "bold",
+    textAlign: "center",
   },
 });
 
-export default MenuOptionsScreen
-;
+export default MenuOptionsScreen;

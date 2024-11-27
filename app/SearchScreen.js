@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   TextInput,
@@ -9,28 +9,40 @@ import {
   TouchableOpacity,
 } from "react-native";
 
-const studentsData = [
-  { id: "1", registrationNumber: "BSC-44-21", name: "Hassan Zamin" },
-  { id: "2", registrationNumber: "BSC-COM-06-21", name: "Leo Jamu" },
-  { id: "3", registrationNumber: "BSC-INF-15-21", name: "Louis Makwinja" },
-  { id: "4", registrationNumber: "BSC-INF-17-21", name: "Rachael Chavula" },
-  { id: "5", registrationNumber: "BED/COM/07/22", name: "Malivenji Wongani" },
-  { id: "6", registrationNumber: "BSC/COM/27/21", name: "Chitowe Sifiso" },
-  // Add more student records as needed
-];
-
 const SearchScreen = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredStudents, setFilteredStudents] = useState([]);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [feedbackMessage, setFeedbackMessage] = useState("");
+  const [studentsData, setStudentsData] = useState([]);
+
+  // Fetch data from Google Sheets
+  useEffect(() => {
+    const fetchStudentsData = async () => {
+      try {
+        const response = await fetch(
+          "https://sheets.googleapis.com/v4/spreadsheets/1OkMkP_5oeSt8Y8l82afCoj2L1y1Jab8aIbB9_MK-EgU/values/Sheet1!A:B?key=AIzaSyB0-Y_ysx3BjiuqIPAse9AFvwijTEUgR2Y"
+        );
+        const data = await response.json();
+        const rows = data.values.slice(1); // Skip header row
+        const formattedData = rows.map((row, index) => ({
+          id: (index + 1).toString(),
+          registrationNumber: row[0], // Assuming registration number is in the first column
+          name: row[1], // Assuming name is in the second column
+        }));
+        setStudentsData(formattedData);
+      } catch (error) {
+        console.error("Error fetching students data:", error);
+      }
+    };
+
+    fetchStudentsData();
+  }, []);
 
   const handleSearch = (text) => {
     setSearchTerm(text);
     if (text.length > 0) {
       const filtered = studentsData.filter(
-        //Filter function to match what the user input and  the data in the array
-
         (student) =>
           student.registrationNumber
             .toLowerCase()
@@ -44,9 +56,8 @@ const SearchScreen = () => {
   };
 
   const handleSelectStudent = (student) => {
-    //A function that allows the searcher to tick on the searched student
     setSelectedStudent(student);
-    setFeedbackMessage(`${student.name} Confirmed!!`);
+    setFeedbackMessage(`${student.name} has marked as attended!!`);
     setSearchTerm(""); // Clear the search input
     setFilteredStudents([]); // Clear the filtered list
   };
@@ -66,7 +77,7 @@ const SearchScreen = () => {
       <View style={styles.searchbarcontainer}>
         <Image
           source={{
-            uri: "https://i.pinimg.com/736x/fa/2d/a4/fa2da4e6b61aa745f198314584dd8826.jpg", //Search bar to improve clarity
+            uri: "https://i.pinimg.com/736x/fa/2d/a4/fa2da4e6b61aa745f198314584dd8826.jpg", // Search bar to improve clarity
           }}
           style={styles.searchbar}
           resizeMode="contain"
@@ -101,7 +112,6 @@ const SearchScreen = () => {
     </View>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
