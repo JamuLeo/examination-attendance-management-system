@@ -1,50 +1,20 @@
-# Welcome to your Expo app 👋
+EXAMINATION ATTENDANCE MOBILE APP
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+This app replaces the manual registration system, which is time-consuming. It allows the instructor to simply scan the student ID and verify or search manually by name or registration number.
 
-## Get started
+Firstly, the academic instructor needs to download the Android app from the Expo official site: https://expo.dev/accounts/zainhutsle/projects/examination-attendance-management-system/builds/41dc2773-847d-4a9e-ad6d-b3bb4311f6ef.
 
-1. Install dependencies
+Once the app is installed, allow the phone's camera permission to access the scanning functionality in the app.
+The user is given an email and password for login to the app for identification and authentication.
 
-   ```bash
-   npm install
-   ```
+So far, we have only two users (academic instructors):
 
-2. Start the app
+User: admin311@gmail.com
+Password: FGBR56
+User: admin312@gmail.com
+Password: FGBR57
+The academic instructor specifies the department, course, venue, and time.
 
-   ```bash
-    npx expo start
-   ```
+The academic instructor can scan the student ID or search manually in CheckIn or CheckOut.
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+The academic instructor can access the Google Sheet to view the attendance of students, but in view mode only.
