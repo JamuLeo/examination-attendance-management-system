@@ -16,5 +16,8 @@ Password: FGBR57
 The academic instructor specifies the department, course, venue, and time.
 
 The academic instructor can scan the student ID (First & second year students only as for third and fourth years shows missing column when scanned) or search manually in CheckIn or CheckOut only for those students who are in our database.
+Some sample students are already added to our google sheet:
+(https://docs.google.com/spreadsheets/d/1OkMkP_5oeSt8Y8l82afCoj2L1y1Jab8aIbB9_MK-EgU/edit?gid=0#gid=0),
+More students can be added by the course leturer
 
 The academic instructor can access the Google Sheet to view the attendance of students, but in view mode only.
